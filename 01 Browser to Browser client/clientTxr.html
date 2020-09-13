@@ -1,0 +1,28 @@
+<html>
+<head>
+  <title>Txr MQTT test</title>
+</head>
+<body>
+
+<button onclick="Txr()" style="margin: 0 auto; display:block; width:40%;height:20%;">
+<!--When button clicked, send message-->
+Send message
+</button>
+<script src="https://unpkg.com/mqtt@3.0.0/dist/mqtt.min.js"></script>
+<script>
+  var client = mqtt.connect("ws://test.mosquitto.org:8080"); // add broker URL here to connect the client. WebSocket required
+  client.on("connect",function(){	
+  console.log("connected");                                  //after it connects, display confirmation
+  })
+ 
+
+function Txr(){
+  var today = new Date();                                   //get time to send as message
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var msg = "Time is  "+time;
+  client.publish("maceiottest", msg);                       //publish message and topic
+  console.log("Published message : "+msg);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>Rxr MQTT test</title>
+</head>
+<body>
+<ul id="msgs" style="margin: 0 auto; display:block; width:80%;height:100%;">
+
+<!-- Div To append all incoming messages-->
+
+</ul>
+
+
+<script src="https://unpkg.com/mqtt@3.0.0/dist/mqtt.min.js"></script>
+<script>
+  var client = mqtt.connect("ws://test.mosquitto.org:8080") // add broker URL here to connect the client. WebSocket required
+  client.on("connect",function(){	  
+  console.log("Connected to Broker");                       //after it connects, display confirmation
+  client.subscribe("maceiottest")                           //subscribe to topic
+  console.log("Subscribed to topic : maceiottest")
+});
+
+  client.on("message", function (topic, payload) {
+    console.log(topic +" : "+payload);                      //when message arrives for subscribed topic
+    var div = document.getElementById('msgs');              
+    div.innerHTML += '<li>'+payload+'</li>';                //append messages to list
+    //client.end()
+})
+
+</script>
+</body>
+</html>

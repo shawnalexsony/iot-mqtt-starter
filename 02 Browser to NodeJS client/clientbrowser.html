@@ -1,0 +1,46 @@
+<html>
+<head>
+  <title>MQTT browser client test</title>
+</head>
+<body>
+
+<button onclick="Txr()" style="margin: 0 auto; display:block; width:40%;height:20%;">
+<!--When button clicked, send message-->
+Send message
+</button>
+
+<br><br>
+
+<h4 id="msgs" style="margin: 0 auto; display:block;text-align:center;"> 
+
+<!-- Div To append all incoming messages-->
+
+</h4>
+
+<script src="https://unpkg.com/mqtt@3.0.0/dist/mqtt.min.js"></script>
+<script>
+  var client = mqtt.connect("ws://test.mosquitto.org:8080"); // add broker URL here to connect the client. WebSocket required
+  client.on("connect",function(){	  
+  console.log("connected");                                  //after it connects, display confirmation
+  client.subscribe("maceiottest-node");                      //subscribe to topic
+  console.log("Subscribed to topic : maceiottest-node");
+
+  })
+  
+  client.on("message", function (topic, payload) {           //when message arrives for subscribed topic
+    console.log(topic +" : "+payload);
+    var div = document.getElementById('msgs');
+    div.innerHTML += payload+"<br>";                         //append messages to list
+    //client.end()
+  })
+
+function Txr(){
+  var today = new Date();                                    //get time to send as message
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var msg = "Message from Browser at time :"+time;
+  client.publish("maceiottest-browser", msg);                //publish message and topic
+  console.log("Published message to NodeJS at "+time.toString());
+  }
+</script>
+</body>
+</html>

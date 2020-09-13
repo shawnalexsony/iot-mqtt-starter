@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>MQTT browser client test</title>
+</head>
+<body>
+
+<button onclick="TxrOn()" style="margin: 0 auto; display:block; width:40%;height:20%;">
+<button onclick="TxrOff()" style="margin: 0 auto; display:block; width:40%;height:20%;">
+<!--When button clicked, send message-->
+Send message
+</button>
+
+<br><br>
+
+<h4 id="msgs" style="margin: 0 auto; display:block;text-align:center;"> 
+
+<!-- Div To append all incoming messages-->
+
+</h4>
+
+<script src="https://unpkg.com/mqtt@3.0.0/dist/mqtt.min.js"></script>
+<script>
+  var client = mqtt.connect("ws://test.mosquitto.org:8080"); // add broker URL here to connect the client. WebSocket required
+  client.on("connect",function(){	  
+  console.log("connected");                                  //after it connects, display confirmation
+  client.subscribe("maceiot/nodemcu");                       //subscribe to topic
+  console.log("Subscribed to topic : maceiot/nodemcu");
+
+  })
+  
+  client.on("message", function (topic, payload) {           //when message arrives for subscribed topic
+    console.log(topic +" : "+payload);
+    var div = document.getElementById('msgs');
+    div.innerHTML += payload+"<br>";                         //append messages to list
+    //client.end()
+  })
+
+function TxrOn(){
+  client.publish("maceiot/browser", "1");                    //publish message for LED ON
+  console.log("Published LED ON command");
+  }
+function TxrOff(){
+  client.publish("maceiot/browser", "0");                    //publish message for LED OFF
+  console.log("Published LED OFF command");
+  }
+</script>
+</body>
+</html>
