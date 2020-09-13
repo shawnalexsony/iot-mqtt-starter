@@ -34,8 +34,10 @@ https://github.com/knolleary/pubsubclient
 
 <h3>Contents</h3>
 
-01 Browser to Browser MQTT communication using mqtt.js javscript client <br>
-02 Browser to NodeJS app MQTT communication using mqtt.js javscript client <br>
-03 Python MQTT client using paho-mqtt <br>
-04 HTPP-MQTT bridge to convert HTTP requests to MQTT messages <br>
-05 ESP8266 Arduino client using PubSubClient library <br>
+* 01 Browser to Browser MQTT communication using mqtt.js javscript client <br>
+* 02 Browser to NodeJS app MQTT communication using mqtt.js javscript client <br>
+* 03 Python MQTT client using paho-mqtt <br>
+* 04 HTPP-MQTT bridge to convert HTTP requests to MQTT messages <br>
+* 05 ESP8266 Arduino client using PubSubClient library <br>
+
+_Note: Install all required packages and libraries._
