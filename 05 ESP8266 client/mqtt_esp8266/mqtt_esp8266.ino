@@ -15,9 +15,9 @@
 
 // Update these with values suitable for your network.
 
-const char* ssid = "........";      //wifi name
-const char* password = "........";  //wifi password
-const char* mqtt_server = "test.mosquitto.org";
+const char* ssid = "........";                  //wifi name
+const char* password = "........";              //wifi password
+const char* mqtt_server = "test.mosquitto.org"; //URL of online broker
 
 WiFiClient espClient;
 PubSubClient client(espClient);
