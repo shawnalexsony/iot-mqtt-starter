@@ -17,7 +17,7 @@
 
 const char* ssid = "........";      //wifi name
 const char* password = "........";  //wifi password
-const char* mqtt_server = "test.mosquitto.com";
+const char* mqtt_server = "test.mosquitto.org";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
